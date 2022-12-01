@@ -1,0 +1,26 @@
+         DB 0,"#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$@"
+INICIO_A DB   "!MSJDMMADMINISTRACAOLFJKKLSJDFKLASJDFAJSM@"
+         DB   "!AIJDFIKASJDKFLJSADLEUGIMLSJDFKLADJDFTJIA@"
+         DB   "!ALGRDFGKCASDJFFMSAJDKLJJSADKLFJLMDSMDGJK@"
+         DB   "!ASJOFLKUIOIGUELISADLEUGIMPSJDFAMACUMAKJS@"
+         DB   "!ALLDELDFESPDJFHGSAJDKUEJSADKLFJLUKLEDFLK@"
+         DB   "!ASEAELAMBULETORIOMALFGLKLSJDFKLAGJLEOJSA@"
+         DB   "!ALUVDFJKEASDIFEESAJDKILJSADKLFJEAKSURFLK@"
+         DB   "!ASAEFLKALJDKFRLLADKALFMAKLSJDFNLAJDEMGSA@"
+         DB   "!ALILTFJKLASDJFOKALEPACLJSALEURIMKDSLJFIK@"
+INICIO_B DB   "!RSFEFLKASELETROCARDIOGRAMASDFKLASJDFKJSM@"
+         DB   "*****************************************#",0
+      
+      
+         DB 0,"#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$@"
+TRACO    DB   "!----------------------------------------@"
+         DB   "!----------------------------------------@"
+         DB   "!----------------------------------------@"
+         DB   "!----------------------------------------@"
+         DB   "!----------------------------------------@"
+         DB   "!----------------------------------------@"
+         DB   "!----------------------------------------@"
+         DB   "!----------------------------------------@"
+         DB   "!----------------------------------------@"
+         DB   "!----------------------------------------@"
+         DB   "*****************************************#",0  
