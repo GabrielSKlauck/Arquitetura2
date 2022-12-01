@@ -8,26 +8,30 @@ org 100h
                              
 DEFINE_GET_STRING
 DEFINE_PRINT_STRING
-
-    ;MOV DI, OFFSET PALAVRA
-    MOV DX, TAMANHO + 1
-    CALL GET_STRING
+   
     
-    ;PARA IR PARA PROXIMA POSICAO DO VETOR, FACA ADD BX,2
+    MOV DX, TAMANHO + 1  
+    
+    CALL INICIO_POSICAO
+
     INICIO_POSICAO:
     MOV CX,0
     MOV BX,CX
-    JMP APRE                           
-    
+    JMP APRE 
+                              
+    ;PARA IR PARA PROXIMA POSICAO DO VETOR, FACA ADD BX,2
     PROX_POSICAO:
     ADD CX,2
+    
     MOV BX,CX
+   
     JMP APRE
     
     APRE:  
-    
+    CALL GET_STRING
     ;VERIFICA SE O VALOR NO VETOR = 0
-    ;SE SIM PULA PARA SEM PALAVRAS
+    ;SE SIM PULA PARA SEM PALAVRAS 
+    
     MOV SI, PONTEIRO_PALAVRAS[BX]
     MOV DL,[SI]
     CMP DL, 0
@@ -38,16 +42,13 @@ DEFINE_PRINT_STRING
     CALL PRINT_STRING
         
     MOV SI,PONTEIRO_PALAVRAS[BX];PASSA A PALAVRA DO VETOR NA POSICAO 0 PARA SI
-                                                                
     CALL PRINT_STRING
-    CALL PULA_LINHA
-    
-     
     MOV DI, OFFSET INICIO_A
     MOV BX, OFFSET TRACO
-                                 
-                                 
-    CALL PULA_LINHA                                  
+    MOV BP,0
+                                                                
+    CALL PULA_LINHA
+                                                                                                           
     CALL PROCURA_ESQUERDA_DIREITA
     CALL PULA_LINHA
     JMP PROX_POSICAO
@@ -56,13 +57,17 @@ SEM_PALAVRAS:
 CALL PULA_LINHA
 MOV SI, OFFSET SEM_PALAVRA
 CALL PRINT_STRING
+MOV AH,0
+INT 21H
+
       
 
 PROCURA_ESQUERDA_DIREITA:
     PUSHF  
-    PUSH DX 
-    
-    
+    PUSH DX
+    MOV DI, OFFSET INICIO_A
+    MOV BX, OFFSET TRACO
+    MOV BP,0         
     
 PROCURANDO_ESQUERDA_DIREITA_IGUAIS:
     MOV DL, [SI]
@@ -72,7 +77,7 @@ PROCURANDO_ESQUERDA_DIREITA_IGUAIS:
     JE  ACHOU_SUBSTRING_PROCURA_ESQUERDA_DIREITA 
     
     CMP DH, 0                                        
-    JE  NAO_ACHOU_SUBSTRING_PROCURA_ESQUERDA_DIREITA 
+    JE  PROX_POSICAO 
     
     CMP DH,DL
     JE  IGUAL_PARCIAL_PROCURANDO_ESQUERDA_DIREITA_IGUAIS 
@@ -171,7 +176,7 @@ IMPRECAO:
     CMP DL, 0
     JE RESTO_IMPRECAO
     JMP IMPRECAO
-RET
+
   
     
 RESTO_IMPRECAO:
@@ -182,20 +187,21 @@ RESTO_IMPRECAO:
     JE PULA_FIM 
     INC BX
     MOV DL,[BX]
+    INC DI
     CMP DL, 0
-    JE FIM_PROCURA_ESQUERDA_DIREITA 
+    JE PROX_POSICAO
     JMP RESTO_IMPRECAO
-           
-    
+
 NAO_ACHOU_SUBSTRING_PROCURA_ESQUERDA_DIREITA:   
     MOV SI, OFFSET NAO_ACHADO
     CALL PRINT_STRING
+    JMP PROX_POSICAO
     
     
 FIM_PROCURA_ESQUERDA_DIREITA:
     POP DX
     POPF
-    RET 
+    JMP PROX_POSICAO 
  
 PULA_LINHA:                      
     pushf
@@ -239,7 +245,7 @@ PALAVRA DB TAMANHO DUP(" "),0
 
 PONTEIRO_PALAVRAS DW P0,P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11,P12,P13,P14,P15,P16,P17,P18,P19,P20,P21,P22,P23,P24,P25,P26,P27,P28
 
-P0  DB "ADMINISTRACAO",0
+P0  DB "PRONTOSOCORRO",0
 P1  DB "AMBULATORIO",0
 P2  DB "ANDADOR",0
 P3  DB "CAMA",0
@@ -270,7 +276,7 @@ P27 DB "OBITO",0
 P28 DB 0  ; INDICADOR DE FIM DE PALAVRAS...TEM QUE PROCURAR
      
          DB 0,"#$$$$$$$$$$$$$$$$$$$$@" 
-INICIO_A DB   "!DIDOADMINISTRACAOYIT@"
+INICIO_A DB   "!DIDOIROTAROBALTEACET@"
          DB   "!OACARTSINIMDAMLEATLE@"
          DB   "!FETPRONTOSOCORROEOEL@"
          DB   "!TOUTITDTSOIEPOOOOMTE@"
